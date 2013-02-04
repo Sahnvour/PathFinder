@@ -161,3 +161,13 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+###########
+## Local
+###########
+
+PathFinder/*
+test/*
+resources/*
+*.sln
+.gitignore
