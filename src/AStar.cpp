@@ -16,7 +16,7 @@ bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 
 	path.clear();
 	std::make_heap(open.begin(), open.end(), CompareNodes());
-	open.push_back(m_start);
+	open.push_back(m_start); std::push_heap(open.begin(), open.end(), CompareNodes());
 
 	while(!open.empty())
 	{
