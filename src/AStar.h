@@ -1,7 +1,8 @@
 #pragma once
 #include "PathAlgorithm.h"
-#include <queue>
 #include <vector>
+#include <algorithm>
+#include <iostream>
 
 struct CompareNodes
 {
@@ -19,6 +20,7 @@ class AStar : public PathAlgorithm
 		
 		bool getPath(std::vector<Node*>& path, Distance mode);
 		void releaseNodes();
+		void clear();
 
 	private:
 		bool inOpen(Node* node);
@@ -27,8 +29,5 @@ class AStar : public PathAlgorithm
 		void releaseOpen();
 		void releaseClosed();
 		
-		std::deque<Node*> open;
-		std::priority_queue<Node*, std::deque<Node*>, CompareNodes> open_queue;
-		std::deque<Node*> closed;
-		std::priority_queue<Node*, std::deque<Node*>, CompareNodes> closed_queue;
+		std::vector<Node*> open, closed;
 };

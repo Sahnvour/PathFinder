@@ -1,7 +1,7 @@
 #include "AStar.h"
-#include <algorithm>
 
-AStar::AStar(void) : open_queue(CompareNodes(), open), closed_queue(CompareNodes(), closed)
+
+AStar::AStar(void)
 {
 }
 
@@ -13,26 +13,26 @@ bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 {
 	Node *currentNode, *childNode;
 	std::vector<Node*>* children;
+
 	path.clear();
-	open.clear();
-	closed.clear();
+	std::make_heap(open.begin(), open.end(), CompareNodes());
 	open.push_back(m_start);
 
 	while(!open.empty())
 	{
-		std::sort(open.begin(), open.end(), CompareNodes()); // Not optimized : see the word document
+		std::sort_heap(open.begin(), open.end(), CompareNodes());
 		currentNode = open.front(); // pop n node from open for which f is minimal
-		open.pop_front();
+		std::pop_heap(open.begin(), open.end(), CompareNodes()); open.pop_back();
 		closed.push_back(currentNode);
 		
-		if(*currentNode == m_goal)
+		if(currentNode == m_goal)
 		{
 			reconstructPath(currentNode, path);
 			return true;
 		}
-		
-		children = currentNode->getChildren(); // for each successor n' of n
-		for(const auto& child : *children)
+
+		children = currentNode->getChildren();
+		for(const auto& child : *children )// for each successor n' of n
 		{
 			childNode = child;
 			float g = realDistanceFromStart(currentNode) + distanceBetween(currentNode, childNode);
@@ -48,7 +48,7 @@ bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 			if(inClosed(childNode))
 				removeFromClosed(childNode);
 			if(!inOpen(childNode))
-				open.push_back(childNode);
+				open.push_back(childNode); std::push_heap(open.begin(), open.end(), CompareNodes());
 		}
 	}
 	return false;
@@ -58,6 +58,12 @@ void AStar::releaseNodes()
 {
 	releaseOpen();
 	releaseClosed();
+}
+
+void AStar::clear()
+{
+	open.clear();
+	closed.clear();
 }
 
 bool AStar::inOpen(Node* node)
@@ -84,6 +90,7 @@ void AStar::removeFromClosed(Node* node)
 			closed.erase(closedIt);
 			break;
 		}
+	//closed2.erase(node);
 }
 
 void AStar::releaseOpen()

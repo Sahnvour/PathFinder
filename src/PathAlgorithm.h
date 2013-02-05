@@ -22,6 +22,7 @@ class PathAlgorithm
 
 		virtual bool getPath(std::vector<Node*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
 		virtual void releaseNodes() = 0;
+		virtual void clear() = 0;
 
 		void setDistanceMode(Distance mode);
 		void setGoal(Node* goal);
