@@ -19,26 +19,25 @@ void PathAlgorithm::setDistanceMode(Distance mode)
 	m_distanceMode = mode;
 }
 
-void PathAlgorithm::setGoal(Step* goal)
+void PathAlgorithm::setGoal(Node* goal)
 {
 	m_goal = goal;
 }
 
-void PathAlgorithm::setStart(Step* start)
+void PathAlgorithm::setStart(Node* start)
 {
 	m_start = start;
 }
 
-// Uses the user implementation of Step::distanceTo
-float PathAlgorithm::distanceBetween(Step* s1, Step* s2) const
+float PathAlgorithm::distanceBetween(Node* n1, Node* n2) const
 {
-	return s1->distanceTo(s2);
+	return n1->distanceTo(n2);
 }
 
-float PathAlgorithm::realDistanceFromStart(Step* step) const
+float PathAlgorithm::realDistanceFromStart(Node* node) const
 {
-	Step* parent = step->getParent();
-	Step* current = step;
+	Node* parent = node->getParent();
+	Node* current = node;
 	float distance = 0.0;
 
 	while(parent != nullptr)
@@ -50,15 +49,15 @@ float PathAlgorithm::realDistanceFromStart(Step* step) const
 	return distance;
 }
 
-float PathAlgorithm::distanceToGoal(Step* step) const
+float PathAlgorithm::distanceToGoal(Node* node) const
 {
-	return distanceBetween(step, m_goal);
+	return distanceBetween(node, m_goal);
 }
 
-void PathAlgorithm::reconstructPath(Step* step, std::vector<Step*>& path)
+void PathAlgorithm::reconstructPath(Node* node, std::vector<Node*>& path)
 {
-	Step* parent = step->getParent();
-	path.push_back(step);
+	Node* parent = node->getParent();
+	path.push_back(node);
 	while(parent != nullptr)
 	{
 		path.push_back(parent);

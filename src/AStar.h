@@ -10,26 +10,26 @@ class AStar : public PathAlgorithm
 		AStar(void);
 		~AStar(void);
 		
-		bool getPath(std::vector<Step*>& path, Distance mode);
-		void releaseSteps();
+		bool getPath(std::vector<Node*>& path, Distance mode);
+		void releaseNodes();
 
 	private:
-		bool inOpen(Step* step);
-		bool inClosed(Step* step);
-		void removeFromClosed(Step* step);
+		bool inOpen(Node* Node);
+		bool inClosed(Node* Node);
+		void removeFromClosed(Node* Node);
 		void releaseOpen();
 		void releaseClosed();
 		
-		std::deque<Step*> open;
-		std::deque<Step*>::iterator openIt;
-		std::deque<Step*> closed;
-		std::deque<Step*>::iterator closedIt;
+		std::deque<Node*> open;
+		std::deque<Node*>::iterator openIt;
+		std::deque<Node*> closed;
+		std::deque<Node*>::iterator closedIt;
 };
 
 // Struct used for the std::sort algorithm
-struct CompareSteps
+struct CompareNodes
 {
-	bool operator() (const Step* s1, const Step *s2) const
+	bool operator() (const Node* s1, const Node *s2) const
 	{
 		return s1->getF() < s2->getF();
 	}

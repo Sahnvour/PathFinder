@@ -1,4 +1,4 @@
-#ifdef PATHFINDER_H
+/*#ifdef PATHFINDER_H
 
 template <class T>
 PathFinder<T>::PathFinder(void)
@@ -44,13 +44,13 @@ bool PathFinder<T>::getPath(std::vector<T*>& solution)
 
 	// Get the path from the search algorithm
 	bool pathFound = m_algorithm->getPath(path);
-	m_algorithm->releaseSteps(); // don't forget to release the steps, if they are reused to find another path ...
+	m_algorithm->releaseNodes(); // don't forget to release the Nodes, if they are reused to find another path ...
 
-	// Fill in solution backwards, because the path algorithm gives Steps from goal to start
+	// Fill in solution backwards, because the path algorithm gives Nodes from goal to start
 	for(rit = path.rbegin(); rit != path.rend(); ++rit)
 		solution.push_back( static_cast<T*>(*rit) );
 
 	return pathFound;
 }
 
-#endif
+#endif*/

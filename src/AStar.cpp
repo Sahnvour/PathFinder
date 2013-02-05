@@ -9,10 +9,10 @@ AStar::~AStar(void)
 {
 }
 
-bool AStar::getPath(std::vector<Step*>& path, Distance mode)
+bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 {
-	Step *currentStep, *childStep;
-	std::vector<Step*>* children;
+	Node *currentNode, *childNode;
+	std::vector<Node*>* children;
 	path.clear();
 	open.clear();
 	closed.clear();
@@ -20,66 +20,66 @@ bool AStar::getPath(std::vector<Step*>& path, Distance mode)
 
 	while(!open.empty())
 	{
-		std::sort(open.begin(), open.end(), CompareSteps()); // Not optimized : see the word document
-		currentStep = open.front(); // pop n node from open for which f is minimal
+		std::sort(open.begin(), open.end(), CompareNodes()); // Not optimized : see the word document
+		currentNode = open.front(); // pop n node from open for which f is minimal
 		open.pop_front();
-		closed.push_back(currentStep);
+		closed.push_back(currentNode);
 		
-		if(*currentStep == m_goal)
+		if(*currentNode == m_goal)
 		{
-			reconstructPath(currentStep, path);
+			reconstructPath(currentNode, path);
 			return true;
 		}
 		
-		children = currentStep->getChildren(); // for each successor n' of n
-		for(std::vector<Step*>::iterator it = children->begin(); it != children->end(); ++it) // again : not optimized
+		children = currentNode->getChildren(); // for each successor n' of n
+		for(std::vector<Node*>::iterator it = children->begin(); it != children->end(); ++it) // again : not optimized
 		{
-			childStep = *it;
-			float g = realDistanceFromStart(currentStep) + distanceBetween(currentStep, childStep);
-			if( (inOpen(childStep) || inClosed(childStep)) && childStep->getG() <  g) // n' is already in opend or closed with a lower cost g(n')
+			childNode = *it;
+			float g = realDistanceFromStart(currentNode) + distanceBetween(currentNode, childNode);
+			if( (inOpen(childNode) || inClosed(childNode)) && childNode->getG() <  g) // n' is already in opend or closed with a lower cost g(n')
 				continue; // consider next successor
 
-			float h = distanceToGoal(childStep), f = g + h; // compute f(n')
-			childStep->setF(f);
-			childStep->setG(g);
-			childStep->setH(h);
-			childStep->setParent(currentStep);
+			float h = distanceToGoal(childNode), f = g + h; // compute f(n')
+			childNode->setF(f);
+			childNode->setG(g);
+			childNode->setH(h);
+			childNode->setParent(currentNode);
 
-			if(inClosed(childStep))
-				removeFromClosed(childStep);
-			if(!inOpen(childStep))
-				open.push_back(childStep);
+			if(inClosed(childNode))
+				removeFromClosed(childNode);
+			if(!inOpen(childNode))
+				open.push_back(childNode);
 		}
 	}
 	return false;
 }
 
-void AStar::releaseSteps()
+void AStar::releaseNodes()
 {
 	releaseOpen();
 	releaseClosed();
 }
 
-bool AStar::inOpen(Step* step)
+bool AStar::inOpen(Node* Node)
 {
 	for(openIt = open.begin(); openIt != open.end(); ++openIt)
-		if(*(*openIt) == step)
+		if(*(*openIt) == Node)
 			return true;
 	return false;
 }
 
-bool AStar::inClosed(Step* step)
+bool AStar::inClosed(Node* Node)
 {
 	for(closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
-		if(*(*closedIt) == step)
+		if(*(*closedIt) == Node)
 			return true;
 	return false;
 }
 
-void AStar::removeFromClosed(Step* step)
+void AStar::removeFromClosed(Node* Node)
 {
 	for(closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
-		if(*(*closedIt) == step)
+		if(*(*closedIt) == Node)
 		{
 			closed.erase(closedIt);
 			break;

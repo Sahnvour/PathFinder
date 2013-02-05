@@ -1,10 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "Step.h"
+#include "Node.h"
 
 // Base class for implementing your own algorithms. Pure virtual methods
-// ( getPath() and releaseSteps() ) should be defined.
+// ( getPath() and releaseNodes() ) should be defined.
 class PathAlgorithm
 {
 	public:
@@ -20,21 +20,21 @@ class PathAlgorithm
 			MANHATTAN
 		};
 
-		virtual bool getPath(std::vector<Step*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
-		virtual void releaseSteps() = 0;
+		virtual bool getPath(std::vector<Node*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
+		virtual void releaseNodes() = 0;
 
 		void setDistanceMode(Distance mode);
-		void setGoal(Step* goal);
-		void setStart(Step* start);
+		void setGoal(Node* goal);
+		void setStart(Node* start);
 		Distance getDistanceMode() const;
 
 	protected:
-		float distanceBetween(Step* s1, Step* s2) const;
-		float realDistanceFromStart(Step* step) const;
-		float distanceToGoal(Step* step) const;
+		float distanceBetween(Node* n1, Node* n2) const;
+		float realDistanceFromStart(Node* node) const;
+		float distanceToGoal(Node* node) const;
 
-		void reconstructPath(Step* step, std::vector<Step*>& path);
+		void reconstructPath(Node* node, std::vector<Node*>& path);
 
-		Step* m_start, *m_goal;
+		Node* m_start, *m_goal;
 		Distance m_distanceMode;		
 };
