@@ -32,9 +32,9 @@ bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 		}
 		
 		children = currentNode->getChildren(); // for each successor n' of n
-		for(std::vector<Node*>::iterator it = children->begin(); it != children->end(); ++it) // again : not optimized
+		for(const auto& child : *children) // again : not optimized
 		{
-			childNode = *it;
+			childNode = child;
 			float g = realDistanceFromStart(currentNode) + distanceBetween(currentNode, childNode);
 			if( (inOpen(childNode) || inClosed(childNode)) && childNode->getG() <  g) // n' is already in opend or closed with a lower cost g(n')
 				continue; // consider next successor
@@ -60,26 +60,26 @@ void AStar::releaseNodes()
 	releaseClosed();
 }
 
-bool AStar::inOpen(Node* Node)
+bool AStar::inOpen(Node* node)
 {
-	for(openIt = open.begin(); openIt != open.end(); ++openIt)
-		if(*(*openIt) == Node)
+	for(const auto& n : open)
+		if(*n == node)
 			return true;
 	return false;
 }
 
-bool AStar::inClosed(Node* Node)
+bool AStar::inClosed(Node* node)
 {
-	for(closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
-		if(*(*closedIt) == Node)
+	for(const auto& n : closed)
+		if(*n == node)
 			return true;
 	return false;
 }
 
-void AStar::removeFromClosed(Node* Node)
+void AStar::removeFromClosed(Node* node)
 {
-	for(closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
-		if(*(*closedIt) == Node)
+	for(auto& closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
+		if(*(*closedIt) == node)
 		{
 			closed.erase(closedIt);
 			break;
@@ -88,22 +88,22 @@ void AStar::removeFromClosed(Node* Node)
 
 void AStar::releaseOpen()
 {
-	for(openIt = open.begin(); openIt != open.end(); ++openIt)
+	for(const auto& node : open)
 	{
-		(*openIt)->setF(0.0f);
-		(*openIt)->setG(0.0f);
-		(*openIt)->setH(0.0f);
-		(*openIt)->setParent(nullptr);
+		node->setF(0.0f);
+		node->setG(0.0f);
+		node->setH(0.0f);
+		node->setParent(nullptr);
 	}
 }
 
 void AStar::releaseClosed()
 {
-	for(closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
+	for(const auto& node : closed)
 	{
-		(*closedIt)->setF(0.0f);
-		(*closedIt)->setG(0.0f);
-		(*closedIt)->setH(0.0f);
-		(*closedIt)->setParent(nullptr);
+		node->setF(0.0f);
+		node->setG(0.0f);
+		node->setH(0.0f);
+		node->setParent(nullptr);
 	}
 }
