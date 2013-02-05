@@ -1,7 +1,7 @@
 #include "AStar.h"
 #include <algorithm>
 
-AStar::AStar(void)
+AStar::AStar(void) : open_queue(CompareNodes(), open), closed_queue(CompareNodes(), closed)
 {
 }
 
@@ -32,7 +32,7 @@ bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 		}
 		
 		children = currentNode->getChildren(); // for each successor n' of n
-		for(const auto& child : *children) // again : not optimized
+		for(const auto& child : *children)
 		{
 			childNode = child;
 			float g = realDistanceFromStart(currentNode) + distanceBetween(currentNode, childNode);
@@ -63,7 +63,7 @@ void AStar::releaseNodes()
 bool AStar::inOpen(Node* node)
 {
 	for(const auto& n : open)
-		if(*n == node)
+		if(n == node)
 			return true;
 	return false;
 }
@@ -71,7 +71,7 @@ bool AStar::inOpen(Node* node)
 bool AStar::inClosed(Node* node)
 {
 	for(const auto& n : closed)
-		if(*n == node)
+		if(n == node)
 			return true;
 	return false;
 }
@@ -79,7 +79,7 @@ bool AStar::inClosed(Node* node)
 void AStar::removeFromClosed(Node* node)
 {
 	for(auto& closedIt = closed.begin(); closedIt != closed.end(); ++closedIt)
-		if(*(*closedIt) == node)
+		if(*closedIt == node)
 		{
 			closed.erase(closedIt);
 			break;

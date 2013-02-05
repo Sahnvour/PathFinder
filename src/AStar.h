@@ -11,7 +11,6 @@ struct CompareNodes
 	}
 };
 
-// My simple implementation of A*
 class AStar : public PathAlgorithm
 {
 	public:
@@ -29,5 +28,7 @@ class AStar : public PathAlgorithm
 		void releaseClosed();
 		
 		std::deque<Node*> open;
+		std::priority_queue<Node*, std::deque<Node*>, CompareNodes> open_queue;
 		std::deque<Node*> closed;
+		std::priority_queue<Node*, std::deque<Node*>, CompareNodes> closed_queue;
 };
