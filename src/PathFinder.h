@@ -13,12 +13,12 @@ class PathFinder
 		{
 		}
 
-		PathFinder(PathAlgorithm* algorithm)
+		PathFinder(PathAlgorithm<T>* algorithm)
 		{
 			m_algorithm = algorithm;
 		}
 
-		void setAlgorithm(PathAlgorithm* algorithm)
+		void setAlgorithm(PathAlgorithm<T>* algorithm)
 		{
 			m_algorithm = algorithm;
 		}
@@ -33,6 +33,7 @@ class PathFinder
 			m_goal = goal;
 		}
 
+
 		bool getPath(std::vector<T*>& solution)
 		{
 			m_algorithm->setGoal(m_goal);
@@ -41,22 +42,22 @@ class PathFinder
 			path.clear();
 
 			// Get the path from the search algorithm
-			bool pathFound = m_algorithm->getPath(path);
+			bool pathFound = false;//m_algorithm->getPath(path);
 			m_algorithm->releaseNodes(); // don't forget to release the Nodes, if they are reused to find another path ...
 			m_algorithm->clear();
 
 			// Fill in solution backwards, because the path algorithm gives Nodes from goal to start
-			for(rit = path.rbegin(); rit != path.rend(); ++rit)
+			for(auto rit = path.rbegin(); rit != path.rend(); ++rit)
 				solution.push_back( static_cast<T*>(*rit) );
 
 			return pathFound;
 		}
 
 	private:
-		PathAlgorithm* m_algorithm;
+		PathAlgorithm<T>* m_algorithm;
 		T* m_start, *m_goal;
 		std::vector<Node*> path;
-		std::vector<Node*>::reverse_iterator rit;
+		//std::vector<T*>::reverse_iterator rit;
 };
 
 #endif

@@ -9,20 +9,24 @@ AStar::~AStar(void)
 {
 }
 
-bool AStar::getPath(std::vector<Node*>& path, Distance mode)
+bool AStar::getPath(std::vector<Node*>& path, Distance distance)
 {
-	Node *currentNode, *childNode;
-	std::vector<Node*>* children;
+	AStarNode *currentNode, *childNode;
+	std::vector<AStarNode*>* children;
 
 	path.clear();
 	std::make_heap(open.begin(), open.end(), CompareNodes());
-	open.push_back(m_start); std::push_heap(open.begin(), open.end(), CompareNodes());
+	open.push_back(m_start);
+	std::push_heap(open.begin(), open.end(), CompareNodes());
 
 	while(!open.empty())
 	{
 		std::sort_heap(open.begin(), open.end(), CompareNodes());
 		currentNode = open.front(); // pop n node from open for which f is minimal
-		std::pop_heap(open.begin(), open.end(), CompareNodes()); open.pop_back();
+
+		std::pop_heap(open.begin(), open.end(), CompareNodes());
+		open.pop_back();
+
 		closed.push_back(currentNode);
 		
 		if(currentNode == m_goal)
@@ -48,7 +52,10 @@ bool AStar::getPath(std::vector<Node*>& path, Distance mode)
 			if(inClosed(childNode))
 				removeFromClosed(childNode);
 			if(!inOpen(childNode))
-				open.push_back(childNode); std::push_heap(open.begin(), open.end(), CompareNodes());
+			{
+				open.push_back(childNode);
+				std::push_heap(open.begin(), open.end(), CompareNodes());
+			}
 		}
 	}
 	return false;
@@ -90,7 +97,6 @@ void AStar::removeFromClosed(Node* node)
 			closed.erase(closedIt);
 			break;
 		}
-	//closed2.erase(node);
 }
 
 void AStar::releaseOpen()

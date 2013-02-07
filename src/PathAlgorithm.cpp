@@ -1,6 +1,6 @@
 #include "PathAlgorithm.h"
 
-PathAlgorithm::PathAlgorithm()
+/*PathAlgorithm::PathAlgorithm()
 {
 	m_start = m_goal = nullptr;
 }
@@ -63,4 +63,4 @@ void PathAlgorithm::reconstructPath(Node* node, std::vector<Node*>& path)
 		path.push_back(parent);
 		parent = parent->getParent();
 	}
-}
+}*/

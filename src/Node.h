@@ -13,38 +13,9 @@ class Node
 		Node(void);
 		~Node(void);
 
-		virtual bool operator==(Node* Node) const = 0;
+		//virtual bool operator==(Node* Node) const = 0;
 
-		void setPosition(int x, int y);
-		void setF(float f);
-		void setG(float g);
-		void setH(float h);
 		void setParent(Node* parent);
-
-		inline int Node::getX() const
-		{
-			return m_x;
-		}
-
-		inline int Node::getY() const
-		{
-			return m_y;
-		}
-
-		inline float Node::getF() const
-		{
-			return m_f;
-		}
-
-		inline float Node::getG() const
-		{
-			return m_g;
-		}
-
-		inline float Node::getH() const
-		{
-			return m_h;
-		}
 
 		Node* getParent();
 
@@ -53,16 +24,14 @@ class Node
 		// bool pollChild(Node*& child);  ----> Maybe later
 		virtual void setupChildren() = 0;
 		
-		virtual float distanceTo(Node* Node) = 0;
+		//virtual float distanceTo(Node* Node) = 0;
 
 	protected:
 		void addChild(Node* child);
 		void clearChildren();
 
-		// Basic Node/node information for many (all ?) research algorithm
+		// Basic node information for many (all ?) research algorithm
 		Node* m_parent;
-		float m_f, m_g, m_h;
-		int m_x, m_y;
 
 		std::vector<Node*> m_children;	
 };
