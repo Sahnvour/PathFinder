@@ -43,14 +43,15 @@ class PathFinder
 
 			// Get the path from the search algorithm
 			bool pathFound = m_algorithm->getPath(path);
-			m_algorithm->releaseNodes(); // don't forget to release the Nodes, if they are reused to find another path ...
 			m_algorithm->clear();
+			if(!pathFound)
+				return false;
 
 			// Fill in solution backwards, because the path algorithm gives Nodes from goal to start
 			for(auto rit = path.rbegin(); rit != path.rend(); ++rit)
 				solution.push_back( static_cast<T*>(*rit) );
 
-			return pathFound;
+			return true;
 		}
 
 	private:

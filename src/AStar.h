@@ -11,6 +11,7 @@ class AStarNode : public Node
 		AStarNode()
 		{
 			m_f = m_g = m_h = 0.0;
+			closed = open = false;
 		}
 
 		void setPosition(int x, int y)
@@ -32,6 +33,16 @@ class AStarNode : public Node
 		void setH(float h)
 		{
 			m_h = h;
+		}
+
+		void setOpen(bool value)
+		{
+			open = value;
+		}
+
+		void setClosed(bool value)
+		{
+			closed = true;
 		}
 
 		inline int getX() const
@@ -81,6 +92,13 @@ class AStarNode : public Node
 			// Note : fast euclidean (no square root) does not give good results
 		}
 
+		void release()
+		{
+			open = closed = false;
+			m_f = m_g = m_h = 0.0f;
+			m_parent = nullptr;
+		}
+
 	protected:
 		float m_f, m_g, m_h;
 		int m_x, m_y;
@@ -106,11 +124,6 @@ class AStar : public PathAlgorithm<AStarNode>
 		void clear();
 
 	private:
-		bool inOpen(Node* node);
-		bool inClosed(Node* node);
-		void removeFromClosed(Node* node);
-		void releaseOpen();
-		void releaseClosed();
 		
 		std::vector<AStarNode*> open, closed;
 };

@@ -20,12 +20,10 @@ class PathAlgorithm
 		};
 
 		virtual bool getPath(std::vector<T*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
-		virtual void releaseNodes() = 0;
 		virtual void clear() = 0;
 
-		PathAlgorithm(const std::string& name = "Test !")
+		PathAlgorithm()
 		{
-			m_name = name;
 			m_start = m_goal = nullptr;
 		}
 
@@ -93,5 +91,4 @@ class PathAlgorithm
 
 		T* m_start, *m_goal;
 		Distance m_distanceMode;
-		std::string m_name;
 };
