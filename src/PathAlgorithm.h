@@ -11,15 +11,7 @@ class PathAlgorithm
 {
 	public:
 		
-		// Currently not used
-		enum Distance
-		{
-			EUCLIDEAN,
-			FAST_EUCLIDEAN,
-			MANHATTAN
-		};
-
-		virtual bool getPath(std::vector<T*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
+		virtual bool getPath(std::vector<T*>& path) = 0;
 		virtual void clear() = 0;
 
 		PathAlgorithm()
@@ -27,18 +19,8 @@ class PathAlgorithm
 			m_start = m_goal = nullptr;
 		}
 
-		~PathAlgorithm(void)
+		~PathAlgorithm()
 		{
-		}
-
-		Distance getDistanceMode() const
-		{
-			return m_distanceMode;
-		}
-
-		void setDistanceMode(Distance mode)
-		{
-			m_distanceMode = mode;
 		}
 
 		void setGoal(T* goal)
@@ -90,5 +72,4 @@ class PathAlgorithm
 		}
 
 		T* m_start, *m_goal;
-		Distance m_distanceMode;
 };

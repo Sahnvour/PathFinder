@@ -1,13 +1,12 @@
 #include "Node.h"
 
-Node::Node(void)
+Node::Node()
 {
 	m_parent = nullptr;
 }
 
-Node::~Node(void)
-{
-}
+Node::~Node()
+{}
 
 Node* Node::getParent()
 {
@@ -33,4 +32,3 @@ void Node::setParent(Node* parent)
 {
 	m_parent = parent;
 }
-

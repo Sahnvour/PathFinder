@@ -1,7 +1,8 @@
 #pragma once
-#include "PathAlgorithm.h"
+
 #include <vector>
 #include <algorithm>
+#include "PathAlgorithm.h"
 
 class AStarNode : public Node
 {
@@ -115,10 +116,10 @@ struct CompareNodes
 class AStar : public PathAlgorithm<AStarNode>
 {
 	public:
-		AStar(void);
-		~AStar(void);
+		AStar();
+		~AStar();
 		
-		bool getPath(std::vector<AStarNode*>& path, Distance mode);
+		bool getPath(std::vector<AStarNode*>& path);
 		void clear();
 
 	private:
