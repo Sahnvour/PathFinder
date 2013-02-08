@@ -1,6 +1,5 @@
 #pragma once
-#ifndef PATHFINDER_H
-#define PATHFINDER_H
+
 #include <vector>
 #include "PathAlgorithm.h"
 
@@ -60,5 +59,3 @@ class PathFinder
 		std::vector<T*> path;
 		//std::vector<T*>::reverse_iterator rit;
 };
-
-#endif
