@@ -69,9 +69,9 @@ class AStarNode : public Node
 			return closed;
 		}
 
-		std::vector<AStarNode*>* getChildren()
+		std::vector<AStarNode*>& getChildren()
 		{
-			return reinterpret_cast<std::vector<AStarNode*>*>(&m_children);
+			return reinterpret_cast<std::vector<AStarNode*>&>(m_children);
 		}
 
 		float distanceTo(AStarNode* node)
@@ -101,7 +101,7 @@ class AStar : public PathAlgorithm<AStarNode>
 		AStar(void);
 		~AStar(void);
 		
-		bool getPath(std::vector<Node*>& path, Distance mode);
+		bool getPath(std::vector<AStarNode*>& path, Distance mode);
 		void releaseNodes();
 		void clear();
 

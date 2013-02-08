@@ -19,12 +19,12 @@ class Node
 
 		Node* getParent();
 
-		std::vector<Node*>* getChildren();
+		std::vector<Node*>& getChildren();
 
 		// bool pollChild(Node*& child);  ----> Maybe later
 		virtual void setupChildren() = 0;
 		
-		//virtual float distanceTo(Node* Node) = 0;
+		//virtual float distanceTo(Node* node) = 0;
 
 	protected:
 		void addChild(Node* child);
@@ -33,5 +33,5 @@ class Node
 		// Basic node information for many (all ?) research algorithm
 		Node* m_parent;
 
-		std::vector<Node*> m_children;	
+		std::vector<Node*> m_children;
 };

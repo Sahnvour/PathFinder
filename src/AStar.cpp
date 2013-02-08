@@ -9,10 +9,9 @@ AStar::~AStar(void)
 {
 }
 
-bool AStar::getPath(std::vector<Node*>& path, Distance distance)
+bool AStar::getPath(std::vector<AStarNode*>& path, Distance distance)
 {
 	AStarNode *currentNode, *childNode;
-	std::vector<AStarNode*>* children;
 
 	path.clear();
 	std::make_heap(open.begin(), open.end(), CompareNodes());
@@ -35,8 +34,7 @@ bool AStar::getPath(std::vector<Node*>& path, Distance distance)
 			return true;
 		}
 
-		children = currentNode->getChildren();
-		for(const auto& child : *children )// for each successor n' of n
+		for(const auto& child : currentNode->getChildren() )// for each successor n' of n
 		{
 			childNode = child;
 			float g = realDistanceFromStart(currentNode) + distanceBetween(currentNode, childNode);

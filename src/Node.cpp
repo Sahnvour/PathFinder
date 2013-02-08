@@ -1,7 +1,7 @@
 #include "Node.h"
 #include <iostream>
 
-Node::Node(void)
+Node::Node(void) : m_children(8)
 {
 	m_parent = nullptr;
 }
@@ -15,9 +15,9 @@ Node* Node::getParent()
 	return m_parent;
 }
 
-std::vector<Node*>* Node::getChildren()
+std::vector<Node*>& Node::getChildren()
 {
-	return &m_children;
+	return m_children;
 }
 
 void Node::addChild(Node* child)
