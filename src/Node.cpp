@@ -1,7 +1,7 @@
 #include "Node.h"
 #include <iostream>
 
-Node::Node(void) : m_children(8)
+Node::Node(void)
 {
 	m_parent = nullptr;
 }
