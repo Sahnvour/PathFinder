@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include "Node.h"
 
 // Base class for implementing your own algorithms. Pure virtual methods
@@ -18,12 +19,13 @@ class PathAlgorithm
 			MANHATTAN
 		};
 
-		virtual bool getPath(std::vector<Node*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
+		virtual bool getPath(std::vector<T*>& path, Distance mode = FAST_EUCLIDEAN) = 0;
 		virtual void releaseNodes() = 0;
 		virtual void clear() = 0;
 
-		PathAlgorithm()
+		PathAlgorithm(const std::string& name = "Test !")
 		{
+			m_name = name;
 			m_start = m_goal = nullptr;
 		}
 
@@ -78,17 +80,18 @@ class PathAlgorithm
 			return distanceBetween(node, m_goal);
 		}
 
-		void reconstructPath(Node* node, std::vector<Node*>& path)
+		void reconstructPath(T* node, std::vector<T*>& path)
 		{
-			Node* parent = node->getParent();
+			T* parent = reinterpret_cast<T*>(node->getParent());
 			path.push_back(node);
 			while(parent != nullptr)
 			{
 				path.push_back(parent);
-				parent = parent->getParent();
+				parent = reinterpret_cast<T*>(parent->getParent());
 			}
 		}
 
 		T* m_start, *m_goal;
 		Distance m_distanceMode;
+		std::string m_name;
 };
