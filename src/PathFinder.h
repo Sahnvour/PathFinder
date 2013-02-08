@@ -8,10 +8,6 @@ class PathFinder
 {
 	public:
 
-		PathFinder()
-		{
-		}
-
 		PathFinder(PathAlgorithm<T>* algorithm)
 		{
 			m_algorithm = algorithm;
@@ -57,5 +53,4 @@ class PathFinder
 		PathAlgorithm<T>* m_algorithm;
 		T* m_start, *m_goal;
 		std::vector<T*> path;
-		//std::vector<T*>::reverse_iterator rit;
 };

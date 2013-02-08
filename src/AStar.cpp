@@ -1,15 +1,14 @@
 #include "AStar.h"
 
-
-AStar::AStar(void)
+AStar::AStar()
 {
 	std::make_heap(open.begin(), open.end(), CompareNodes());
 }
 
-AStar::~AStar(void)
+AStar::~AStar()
 {}
 
-bool AStar::getPath(std::vector<AStarNode*>& path, Distance distance)
+bool AStar::getPath(std::vector<AStarNode*>& path)
 {
 	AStarNode *currentNode, *childNode;
 
@@ -62,9 +61,9 @@ void AStar::pushOpen(AStarNode* node)
 
 void AStar::popOpen(AStarNode* node)
 {
-	node->setOpen(false);
 	std::pop_heap(open.begin(), open.end(), CompareNodes());
 	open.pop_back();
+	node->setOpen(false);
 }
 
 void AStar::releaseNodes()
