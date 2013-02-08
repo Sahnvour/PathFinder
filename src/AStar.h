@@ -2,7 +2,6 @@
 #include "PathAlgorithm.h"
 #include <vector>
 #include <algorithm>
-#include <iostream>
 
 class AStarNode : public Node
 {
@@ -120,10 +119,12 @@ class AStar : public PathAlgorithm<AStarNode>
 		~AStar(void);
 		
 		bool getPath(std::vector<AStarNode*>& path, Distance mode);
-		void releaseNodes();
 		void clear();
 
 	private:
+		void releaseNodes();
+		void pushOpen(AStarNode* node);
+		void popOpen(AStarNode* node);
 		
 		std::vector<AStarNode*> open, closed;
 };
