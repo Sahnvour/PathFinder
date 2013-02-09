@@ -10,7 +10,7 @@ class Node
 		~Node();
 
 		void setParent(Node* parent);
-		Node* getParent();
+		Node* getParent() const;
 
 		std::vector<Node*>& getChildren();
 		virtual void setupChildren() = 0;

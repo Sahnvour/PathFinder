@@ -85,11 +85,10 @@ class AStarNode : public Node
 			return reinterpret_cast<std::vector<AStarNode*>&>(m_children);
 		}
 
-		float distanceTo(AStarNode* node)
+		float distanceTo(AStarNode* node) const
 		{
 			int newX = m_x - node->getX(), newY = m_y - node->getY();
-			return static_cast<float>(sqrt(newX*newX + newY*newY)); // euclidean distance
-			// Note : fast euclidean (no square root) does not give good results
+			return static_cast<float>(sqrt(newX*newX + newY*newY));
 		}
 
 		void release()
