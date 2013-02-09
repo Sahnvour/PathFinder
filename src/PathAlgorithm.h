@@ -20,8 +20,7 @@ class PathAlgorithm
 		}
 
 		~PathAlgorithm()
-		{
-		}
+		{}
 
 		void setGoal(T* goal)
 		{

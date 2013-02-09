@@ -8,7 +8,7 @@ Node::Node()
 Node::~Node()
 {}
 
-Node* Node::getParent()
+Node* Node::getParent() const
 {
 	return m_parent;
 }
