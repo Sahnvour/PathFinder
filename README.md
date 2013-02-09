@@ -32,9 +32,10 @@ int main()
 		// Do your stuff here to link nodes between them
 		nodes[i].setupChildren();
 	}
+	
 	// Let's say we want the path from the first node to the last one ...
-	myFinder.setStart(nodes[0]);
-	myFinder.setGoal(nodes[99]);
+	myFinder.setStart(&nodes[0]);
+	myFinder.setGoal(&nodes[99]);
 	// ... and that's it !
 	myFinder.getPath(astar, path);
 	
