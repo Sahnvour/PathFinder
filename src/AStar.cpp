@@ -3,6 +3,7 @@
 AStar::AStar()
 {
 	std::make_heap(open.begin(), open.end(), CompareNodes());
+	uniform = false;
 }
 
 AStar::~AStar()
@@ -46,10 +47,31 @@ bool AStar::getPath(std::vector<AStarNode*>& path)
 			if(childNode->isClosed())
 				childNode->setClosed(false);
 			if(!childNode->isOpen())
+			{
+				childNode->setIndex(currentNode->getIndex() +1);
 				pushOpen(childNode);
+			}
 		}
 	}
 	return false;
+}
+
+float AStar::realDistanceFromStart(AStarNode* node) const
+{
+	if(uniform)
+		return node->getIndex();
+	else
+		return PathAlgorithm::realDistanceFromStart(node);
+}
+
+bool AStar::isUniform() const
+{
+	return uniform;
+}
+
+void AStar::setUniform(bool value)
+{
+	uniform = value;
 }
 
 void AStar::pushOpen(AStarNode* node)
