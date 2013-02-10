@@ -40,7 +40,7 @@ class PathAlgorithm
 			return n1->localDistanceTo(n2);
 		}
 
-		float distanceToGoal(T* node) const
+		inline float distanceToGoal(T* node) const
 		{
 			return distanceBetween(node, m_goal);
 		}

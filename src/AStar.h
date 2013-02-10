@@ -127,8 +127,6 @@ class AStar : public PathAlgorithm<AStarNode>
 		bool getPath(std::vector<AStarNode*>& path);
 		void clear();
 
-		float realDistanceFromStart(AStarNode* node) const;
-
 	private:
 		void releaseNodes();
 		void pushOpen(AStarNode* node);

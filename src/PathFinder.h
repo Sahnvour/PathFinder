@@ -31,7 +31,7 @@ class PathFinder
 			return m_goal;
 		}
 
-		bool getPath(PathAlgorithm<T>& algorithm, std::vector<T*>& solution)
+		bool findPath(PathAlgorithm<T>& algorithm, std::vector<T*>& solution)
 		{
 			algorithm.setGoal(m_goal);
 			algorithm.setStart(m_start);
