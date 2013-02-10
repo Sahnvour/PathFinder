@@ -12,6 +12,7 @@ class AStarNode : public Node
 		{
 			m_f = m_g = m_h = 0.0;
 			closed = open = false;
+			m_index = 0;
 		}
 
 		void setPosition(int x, int y)
@@ -43,6 +44,11 @@ class AStarNode : public Node
 		void setClosed(bool value)
 		{
 			closed = true;
+		}
+
+		void setIndex(int value)
+		{
+			m_index = value;	
 		}
 
 		inline int getX() const
@@ -80,6 +86,11 @@ class AStarNode : public Node
 			return closed;
 		}
 
+		inline int getIndex() const
+		{
+			return m_index;
+		}
+
 		std::vector<AStarNode*>& getChildren()
 		{
 			return reinterpret_cast<std::vector<AStarNode*>&>(m_children);
@@ -98,11 +109,13 @@ class AStarNode : public Node
 			open = closed = false;
 			m_f = m_g = m_h = 0.0f;
 			m_parent = nullptr;
+			m_index = 0;
 		}
 
 	protected:
 		float m_f, m_g, m_h;
 		int m_x, m_y;
+		int m_index;
 		bool open, closed;
 };
 
@@ -123,10 +136,17 @@ class AStar : public PathAlgorithm<AStarNode>
 		bool getPath(std::vector<AStarNode*>& path);
 		void clear();
 
+		float realDistanceFromStart(AStarNode* node) const;
+
+		bool isUniform() const;
+		void setUniform(bool value);
+
 	private:
 		void releaseNodes();
 		void pushOpen(AStarNode* node);
 		void popOpen(AStarNode* node);
 		
 		std::vector<AStarNode*> open, closed;
+
+		bool uniform;
 };
