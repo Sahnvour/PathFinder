@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include "PathAlgorithm.h"
+#include "Node.h"
 
 class AStarNode : public Node
 {
@@ -12,8 +13,10 @@ class AStarNode : public Node
 		{
 			m_f = m_g = m_h = 0.0;
 			closed = open = false;
-			m_index = 0;
 		}
+
+		virtual ~AStarNode()
+		{}
 
 		void setPosition(int x, int y)
 		{
@@ -43,20 +46,15 @@ class AStarNode : public Node
 
 		void setClosed(bool value)
 		{
-			closed = true;
+			closed = value;
 		}
 
-		void setIndex(int value)
-		{
-			m_index = value;	
-		}
-
-		inline int getX() const
+		inline unsigned int getX() const
 		{
 			return m_x;
 		}
 
-		inline int getY() const
+		inline unsigned int getY() const
 		{
 			return m_y;
 		}
@@ -86,11 +84,6 @@ class AStarNode : public Node
 			return closed;
 		}
 
-		inline int getIndex() const
-		{
-			return m_index;
-		}
-
 		std::vector<AStarNode*>& getChildren()
 		{
 			return reinterpret_cast<std::vector<AStarNode*>&>(m_children);
@@ -109,13 +102,11 @@ class AStarNode : public Node
 			open = closed = false;
 			m_f = m_g = m_h = 0.0f;
 			m_parent = nullptr;
-			m_index = 0;
 		}
 
 	protected:
 		float m_f, m_g, m_h;
-		int m_x, m_y;
-		int m_index;
+		unsigned int m_x, m_y;
 		bool open, closed;
 };
 
@@ -138,15 +129,10 @@ class AStar : public PathAlgorithm<AStarNode>
 
 		float realDistanceFromStart(AStarNode* node) const;
 
-		bool isUniform() const;
-		void setUniform(bool value);
-
 	private:
 		void releaseNodes();
 		void pushOpen(AStarNode* node);
 		void popOpen(AStarNode* node);
 		
 		std::vector<AStarNode*> open, closed;
-
-		bool uniform;
 };

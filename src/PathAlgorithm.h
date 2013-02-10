@@ -1,8 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <string>
-#include "Node.h"
 
 template<class T>
 class PathAlgorithm
@@ -17,7 +15,7 @@ class PathAlgorithm
 			m_start = m_goal = nullptr;
 		}
 
-		~PathAlgorithm()
+		virtual ~PathAlgorithm()
 		{}
 
 		void setGoal(T* goal)
@@ -42,21 +40,6 @@ class PathAlgorithm
 			return n1->localDistanceTo(n2);
 		}
 
-		float realDistanceFromStart(T* node) const
-		{
-			T* parent = reinterpret_cast<T*>(node->getParent());
-			T* current = node;
-			float distance = 0.0;
-
-			while(parent != nullptr)
-			{
-				distance += localDistanceBetween(current, parent);
-				current = parent;
-				parent = reinterpret_cast<T*>(parent->getParent());
-			}
-			return distance;
-		}
-
 		float distanceToGoal(T* node) const
 		{
 			return distanceBetween(node, m_goal);
@@ -64,12 +47,12 @@ class PathAlgorithm
 
 		void reconstructPath(T* node, std::vector<T*>& path)
 		{
-			T* parent = reinterpret_cast<T*>(node->getParent());
+			T* parent = static_cast<T*>(node->getParent());
 			path.push_back(node);
 			while(parent != nullptr)
 			{
 				path.push_back(parent);
-				parent = reinterpret_cast<T*>(parent->getParent());
+				parent = static_cast<T*>(parent->getParent());
 			}
 		}
 
