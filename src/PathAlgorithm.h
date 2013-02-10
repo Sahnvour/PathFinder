@@ -4,8 +4,6 @@
 #include <string>
 #include "Node.h"
 
-// Base class for implementing your own algorithms. Pure virtual methods
-// ( getPath() and releaseNodes() ) should be defined.
 template<class T>
 class PathAlgorithm
 {
@@ -34,9 +32,14 @@ class PathAlgorithm
 
 	protected:
 
-		float distanceBetween(T* n1, T* n2) const
+		inline float distanceBetween(T* n1, T* n2) const
 		{
 			return n1->distanceTo(n2);
+		}
+
+		inline float localDistanceBetween(T* n1, T* n2) const
+		{
+			return n1->localDistanceTo(n2);
 		}
 
 		float realDistanceFromStart(T* node) const
@@ -47,7 +50,7 @@ class PathAlgorithm
 
 			while(parent != nullptr)
 			{
-				distance += distanceBetween(current, parent);
+				distance += localDistanceBetween(current, parent);
 				current = parent;
 				parent = reinterpret_cast<T*>(parent->getParent());
 			}

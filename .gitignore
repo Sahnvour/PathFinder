@@ -171,3 +171,4 @@ test/*
 resources/*
 *.sln
 .gitignore
+*.png
