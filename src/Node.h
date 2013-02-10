@@ -7,7 +7,7 @@ class Node
 	public:
 
 		Node();
-		~Node();
+		virtual ~Node();
 
 		void setParent(Node* parent);
 		Node* getParent() const;

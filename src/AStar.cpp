@@ -3,7 +3,6 @@
 AStar::AStar()
 {
 	std::make_heap(open.begin(), open.end(), CompareNodes());
-	uniform = false;
 }
 
 AStar::~AStar()
@@ -34,7 +33,7 @@ bool AStar::getPath(std::vector<AStarNode*>& path)
 		for(const auto& child : currentNode->getChildren() )// for each successor n' of n
 		{
 			childNode = child;
-			float g = realDistanceFromStart(currentNode) + distanceBetween(currentNode, childNode);
+			float g = currentNode->getG() + distanceBetween(currentNode, childNode);
 			if( (childNode->isOpen() || childNode->isClosed()) && childNode->getG() <  g) // n' is already in opend or closed with a lower cost g(n')
 				continue; // consider next successor
 
@@ -47,31 +46,10 @@ bool AStar::getPath(std::vector<AStarNode*>& path)
 			if(childNode->isClosed())
 				childNode->setClosed(false);
 			if(!childNode->isOpen())
-			{
-				childNode->setIndex(currentNode->getIndex() +1);
 				pushOpen(childNode);
-			}
 		}
 	}
 	return false;
-}
-
-float AStar::realDistanceFromStart(AStarNode* node) const
-{
-	if(uniform)
-		return node->getIndex();
-	else
-		return PathAlgorithm::realDistanceFromStart(node);
-}
-
-bool AStar::isUniform() const
-{
-	return uniform;
-}
-
-void AStar::setUniform(bool value)
-{
-	uniform = value;
 }
 
 void AStar::pushOpen(AStarNode* node)
