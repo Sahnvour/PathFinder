@@ -11,14 +11,14 @@ class PathFinder
 		PathFinder()
 		{}
 
-		void setStart(T* start)
+		void setStart(T& start)
 		{
-			m_start = start;
+			m_start = &start;
 		}
 
-		void setGoal(T* goal)
+		void setGoal(T& goal)
 		{
-			m_goal = goal;
+			m_goal = &goal;
 		}
 
 		T* getStart() const
@@ -51,6 +51,6 @@ class PathFinder
 		}
 
 	private:
-		T* m_start, *m_goal;
+		T *m_start, *m_goal;
 		std::vector<T*> path;
 };

@@ -91,6 +91,8 @@ class AStarNode : public Node
 			return static_cast<float>(sqrt(newX*newX + newY*newY));
 		}
 
+		virtual float localDistanceTo(AStarNode* node) const = 0;
+
 		void release()
 		{
 			open = closed = false;
