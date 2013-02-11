@@ -2,11 +2,23 @@ PathFinder
 ==========
 
 A small but convenient C++ path finding library.
-Prototype easily your own search algorithms or use existing ones.
+
+## What how why
+
+PathFinder is a _really originally_ named library built for path finding in C++. It aims at providing a set of classic algorithms that are widely used such as A* or Djikstra's, for a generic purpose. It also offers an easy base for prototyping your own specific (or not) algorithms.
+
+I started this project while having a course on Artificial Intelligence Programming, and decided to work a bit more on it for learning. It is quite simple actually but if it can be of any use, please test it ! I'd be very glad to have any comments on this, because I'm sure it is far from being perfect.
+
+Yet, the A* is working well so far and gives me satisfying results (though I did not compare it with anything else) even for complex labyrinths with 100 000s of nodes.
 
 ## Usage
 
+You will (soon) find a few different examples in the appropriate folder, illustrating how to use PathFinder for solving a pictured labyrinth or finding a path on a road network.
+
 ###### Example
+
+Here is a short overview of what is required to get a built-in algorithm to work on your own collection of nodes. The most important thing you have to do yourself is to implement the way your nodes will be related to each other and how to calculate the distance between two linked nodes. The A* will take care of everything else
+
 ```c++
 #include <vector>
 #include <iostream>
