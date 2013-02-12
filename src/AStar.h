@@ -89,11 +89,7 @@ class AStarNode : public Node
 			return reinterpret_cast<std::vector<AStarNode*>&>(m_children);
 		}
 
-		float distanceTo(AStarNode* node) const
-		{
-			int newX = m_x - node->getX(), newY = m_y - node->getY();
-			return static_cast<float>(sqrt(newX*newX + newY*newY));
-		}
+		virtual float distanceTo(AStarNode* node) const = 0;
 
 		virtual float localDistanceTo(AStarNode* node) const = 0;
 

@@ -169,6 +169,8 @@ pip-log.txt
 PathFinder/*
 test/*
 resources/*
+doc/*
+Doxyfile
 *.sln
 .gitignore
 *.png
