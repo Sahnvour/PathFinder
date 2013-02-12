@@ -60,3 +60,9 @@ int main()
 	return 0;
 }
 ```
+
+## Building
+
+There is no extra dependency for the core library.
+
+I have only tested it on my computer (Win7 x86_64, Visual Studio 2012 CTP November) but it should be able to compile on any system with a C++ compiler that supports C++0x. Note that there is a bug with the heap in the AStar algorithm that triggers an exception in debug mode, but the release executable works well.
