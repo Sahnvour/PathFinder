@@ -42,8 +42,8 @@ int main()
 	
 	for(int i = 0; i < 100; ++i)
 	{
-		// Do your stuff here to link nodes between them
-		nodes[i].setupChildren();
+		// Do your stuff here to link nodes between them as needed
+		// by using Node::addChild()
 	}
 	
 	// Let's say we want the path from the first node to the last one ...
