@@ -10,7 +10,7 @@ AStar::~AStar()
 
 bool AStar::getPath(std::vector<AStarNode*>& path)
 {
-	AStarNode *currentNode;
+	AStarNode *currentNode, *childNode;
 	float f, g, h;
 
 	pushOpen(m_start);
@@ -31,9 +31,10 @@ bool AStar::getPath(std::vector<AStarNode*>& path)
 			return true;
 		}
 
-		for(const auto& childNode : currentNode->getChildren() )// for each successor n' of n
+		for(const auto& children : currentNode->getChildren() )// for each successor n' of n
 		{
-			g = currentNode->getG() + distanceBetween(currentNode, childNode);
+			childNode = children.first;
+			g = currentNode->getG() + children.second; // stance from start + distance between the two nodes
 			if( (childNode->isOpen() || childNode->isClosed()) && childNode->getG() <  g) // n' is already in opend or closed with a lower cost g(n')
 				continue; // consider next successor
 

@@ -84,14 +84,16 @@ class AStarNode : public Node
 			return closed;
 		}
 
-		std::vector<AStarNode*>& getChildren()
+		std::vector<std::pair<AStarNode*, float>>& getChildren()
 		{
-			return reinterpret_cast<std::vector<AStarNode*>&>(m_children);
+			return reinterpret_cast<std::vector<std::pair<AStarNode*, float>>&>(m_children);
 		}
 
-		virtual float distanceTo(AStarNode* node) const = 0;
-
-		virtual float localDistanceTo(AStarNode* node) const = 0;
+		float distanceTo(AStarNode* node) const
+		{
+			int newX = m_x - node->getX(), newY = m_y - node->getY();
+			return static_cast<float>(sqrt(newX*newX + newY*newY));
+		}
 
 		void release()
 		{

@@ -30,7 +30,10 @@ class Square : public AStarNode
 
 		float localDistanceTo(AStarNode* node) const
 		{
-			return 1.f;
+			if(node->getX() != m_x && node->getY() != m_y)
+				return 1.41421356237f;
+			else
+				return 1.0f;
 		}
 
 		float distanceTo(AStarNode* node) const
@@ -65,9 +68,13 @@ int main(int argc, char** argv)
 		_getch();
 		return 0;
 	}
-	int width = image.getSize().x, height = image.getSize().y;
+	int width = image.getSize().x,
+		height = image.getSize().y;
 
-	unsigned int x1 = atoi(argv[2]), y1 = atoi(argv[3]), x2 = atoi(argv[4]), y2 = atoi(argv[5]);
+	unsigned int	x1 = atoi(argv[2]),
+					y1 = atoi(argv[3]),
+					x2 = atoi(argv[4]),
+					y2 = atoi(argv[5]);
 	
 	Square **squares;
 
@@ -97,7 +104,7 @@ int main(int argc, char** argv)
 					{
 						aChild = &(squares[newX][newY]);
 						if( aChild->getType() && (newX != x || newY != y) )
-							squares[x][y].addChild(aChild);
+							squares[x][y].addChild(aChild, squares[x][y].localDistanceTo(aChild));
 					}
 				}
 			}

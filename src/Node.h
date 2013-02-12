@@ -32,13 +32,13 @@ class Node
 			@brief Add a node to the children of the current node.
 			@param[in] child A pointer to the child.
 		*/
-		void addChild(Node* child);
+		void addChild(Node* child, float distance);
 
 		/**
 			@brief Returns a vector containing all the children of the current node.
 			@return A vector of Node pointers.
 		*/
-		std::vector<Node*>& getChildren();
+		std::vector<std::pair<Node*, float>>& getChildren();
 
 	protected:
 
@@ -55,5 +55,5 @@ class Node
 		/**
 			List of all the node's children.
 		*/
-		std::vector<Node*> m_children;
+		std::vector<std::pair<Node*, float>> m_children;
 };
