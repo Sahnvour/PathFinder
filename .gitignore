@@ -173,4 +173,4 @@ doc/*
 Doxyfile
 *.sln
 .gitignore
-*.png
+./*.png
