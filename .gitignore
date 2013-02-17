@@ -173,4 +173,7 @@ doc/*
 Doxyfile
 *.sln
 .gitignore
-./*.png
+001.png
+002.png
+France.txt
+solution.png
