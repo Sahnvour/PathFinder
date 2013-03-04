@@ -13,7 +13,7 @@ Yet, the A* is working well so far and gives me satisfying results (though I did
 
 ## Usage
 
-You will (soon) find a few different examples in the appropriate folder, illustrating how to use PathFinder for solving a pictured labyrinth or finding a path on a road network.
+You will find a few different examples in the appropriate folder, illustrating how to use PathFinder for solving a pictured labyrinth or finding a path on a road network.
 
 ###### Example
 
