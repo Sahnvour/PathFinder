@@ -26,8 +26,6 @@ in range [0;99]
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <iostream>
-#include <cstdlib>
-#include <conio.h>
 
 
 /*
@@ -88,7 +86,6 @@ int main(int argc, char** argv)
 	if(argc != 6)
 	{
 		std::cerr << "Invalid number of arguments provided (got " << argc << ", expected 6), type to exit." << std::endl;
-		_getch();
 		return 0;
 	}
 
@@ -97,7 +94,6 @@ int main(int argc, char** argv)
 	if(!image.loadFromFile(filename))
 	{
 		std::cerr << "Failed to load '" << filename << "', type to exit." << std::endl;
-		_getch();
 		return 0;
 	}
 	int width = image.getSize().x,
@@ -169,8 +165,6 @@ int main(int argc, char** argv)
 	for(const auto& square : path)
 		image.setPixel(square->getX(), square->getY(), sf::Color::Red);
 	image.saveToFile("solution.png");
-
-	_getch();
 
 	return 0;
 }

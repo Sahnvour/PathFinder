@@ -21,7 +21,6 @@
 #include <fstream>
 #include <vector>
 #include <map>
-#include <conio.h>
 
 
 /*
@@ -60,7 +59,6 @@ int main(int argc, char** argv)
 	if(argc != 4)
 	{
 		std::cerr << "Invalid number of arguments provided (got " << argc << ", expected 4), type to exit." << std::endl;
-		_getch();
 		return 0;
 	}
 
@@ -70,7 +68,6 @@ int main(int argc, char** argv)
 	if(!file)
 	{
 		std::cerr << "Could not open file '" << argv[1] << "', type to exit." << std::endl;
-		_getch();
 		return 0;
 	}
 
@@ -119,8 +116,6 @@ int main(int argc, char** argv)
 	}
 	else
 		std::cerr << "No path was found, sorry." << std::endl;
-
-	_getch();
 
 	return 0;
 }
