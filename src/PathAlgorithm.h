@@ -31,10 +31,9 @@ class PathAlgorithm
 		/**
 			@brief Default constructor.
 		*/
-		PathAlgorithm()
-		{
-			m_start = m_goal = nullptr;
-		}
+		PathAlgorithm() :
+			m_start(nullptr), m_goal(nullptr)
+		{}
 
 		/**
 			@brief Destructor.

@@ -9,11 +9,10 @@ class AStarNode : public Node
 {
 	public:
 
-		AStarNode()
-		{
-			m_f = m_g = m_h = 0.0;
-			closed = open = false;
-		}
+		AStarNode() :
+			m_f(0.0), m_g(0.0), m_h(0.0),
+			closed(false), open(false)
+		{}
 
 		virtual ~AStarNode()
 		{}

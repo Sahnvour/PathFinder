@@ -9,11 +9,10 @@ class DjikstraNode : public Node
 	static const float infinity;
 
 	public:
-		DjikstraNode()
-		{
-			distance = infinity;
-			closed = false;
-		}
+		DjikstraNode() :
+			distance(infinity),
+			closed(false)
+		{}
 
 		~DjikstraNode()
 		{}

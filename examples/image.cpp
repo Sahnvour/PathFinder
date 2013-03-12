@@ -99,7 +99,7 @@ int main(int argc, char** argv)
 	int width = image.getSize().x,
 		height = image.getSize().y;
 
-	// We'll assume the user gived coordinates that are actually possible in this image
+	// We'll assume the user gave coordinates that are actually possible in this image
 	unsigned int	x1 = atoi(argv[2]),
 					y1 = atoi(argv[3]),
 					x2 = atoi(argv[4]),

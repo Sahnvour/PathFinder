@@ -1,9 +1,8 @@
 #include "Node.h"
 
-Node::Node()
-{
-	m_parent = nullptr;
-}
+Node::Node() :
+	m_parent(nullptr)
+{}
 
 Node::~Node()
 {}

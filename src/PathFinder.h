@@ -8,7 +8,8 @@ class PathFinder
 {
 	public:
 
-		PathFinder()
+		PathFinder() :
+			m_start(nullptr), m_goal(nullptr)
 		{}
 
 		void setStart(T& start)
