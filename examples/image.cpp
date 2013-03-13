@@ -166,5 +166,9 @@ int main(int argc, char** argv)
 		image.setPixel(square->getX(), square->getY(), sf::Color::Red);
 	image.saveToFile("solution.png");
 
+	for(unsigned short int x = 0; x < width; ++x)
+		delete[] squares[x];
+	delete[] squares;
+
 	return 0;
 }
