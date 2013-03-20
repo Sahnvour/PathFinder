@@ -8,7 +8,7 @@ I wrote some examples to illustrate how to use/integrate PathFinder for solving 
 This example is some kind of an image labyrinth solver. I takes an image where white pixels represent the possible paths, and every other colour represents the walls. The result should be quite fast on images of moderate sizes, but beware of really big or unsolvable ones. For example, the 001.png image is solved in approximately 80ms on my desktop. It is not guaranteed to find the best way because of the nature of A*
 
 #### Building
-You will need to have [SFML 2](http://www.sfml-dev.org/index.php) installed on your computer in order to biuld this example ; it is needed to load and save images.
+You will need [SFML 2](http://www.sfml-dev.org/index.php) installed on your computer in order to biuld this example ; it is needed to load and save images.
 
 ####Usage
 Run with 5 arguments :
