@@ -48,7 +48,7 @@ class Square : public AStarNode
 			m_type = type;
 		}
 
-		char getType() const
+		bool getType() const
 		{
 			return m_type;
 		}
