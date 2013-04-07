@@ -1,19 +1,19 @@
-#include "Djikstra.h"
+#include "Dijkstra.h"
 
 #include <limits>
 #include <algorithm>
 
-const float DjikstraNode::infinity = std::numeric_limits<float>::infinity();
+const float DijkstraNode::infinity = std::numeric_limits<float>::infinity();
 
-Djikstra::Djikstra()
+Dijkstra::Dijkstra()
 {}
 
-Djikstra::~Djikstra()
+Dijkstra::~Dijkstra()
 {}
 
-bool Djikstra::getPath(std::vector<DjikstraNode*>& path)
+bool Dijkstra::getPath(std::vector<DijkstraNode*>& path)
 {
-	DjikstraNode *currentNode, *childNode;
+	DijkstraNode *currentNode, *childNode;
 	float dist;
 
 	std::make_heap(open.begin(), open.end(), CompareNodes());
@@ -35,7 +35,7 @@ bool Djikstra::getPath(std::vector<DjikstraNode*>& path)
 
 		for(const auto& children : currentNode->getChildren())
 		{
-			childNode = static_cast<DjikstraNode*>(children.first);
+			childNode = static_cast<DijkstraNode*>(children.first);
 			
 			dist = currentNode->getDistance() + children.second;
 			if(!childNode->isClosed() && dist < childNode->getDistance())
@@ -50,13 +50,13 @@ bool Djikstra::getPath(std::vector<DjikstraNode*>& path)
 	return false;
 }
 
-void Djikstra::pushOpen(DjikstraNode* node)
+void Dijkstra::pushOpen(DijkstraNode* node)
 {
 	open.push_back(node);
 	std::push_heap(open.begin(), open.end(), CompareNodes());
 }
 
-void Djikstra::popOpen(DjikstraNode* node)
+void Dijkstra::popOpen(DijkstraNode* node)
 {
 	std::pop_heap(open.begin(), open.end(), CompareNodes());
 	open.pop_back();
@@ -65,7 +65,7 @@ void Djikstra::popOpen(DjikstraNode* node)
 }
 
 
-void Djikstra::releaseNodes()
+void Dijkstra::releaseNodes()
 {
 	for(const auto& node : open)
 		node->release();
@@ -73,7 +73,7 @@ void Djikstra::releaseNodes()
 		node->release();
 }
 
-void Djikstra::clear()
+void Dijkstra::clear()
 {
 	releaseNodes();
 	open.clear();

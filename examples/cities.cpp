@@ -14,7 +14,7 @@
 
 
 #include "../src/PathFinder.h"
-#include "../src/Djikstra.h"
+#include "../src/Dijkstra.h"
 
 #include <iostream>
 #include <string>
@@ -24,12 +24,12 @@
 
 
 /*
-Create our own class deriving DjikstraNode.
-This is needed for applying Djikstra's Algorithm to our cities.
+Create our own class deriving DijkstraNode.
+This is needed for applying Dijkstra's Algorithm to our cities.
 We can though implement other functionnalities we need, that's why
 I am giving them a name for example.
 */
-class City : public DjikstraNode
+class City : public DijkstraNode
 {
 	public:
 		City(const std::string& name = "Unknown")
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 		cities[city2].setName(city2);
 		/*
 			Now we have to create the links between cities in order to make
-			them usable by Djikstra. A 'child' of a city is another city which
+			them usable by Dijkstra. A 'child' of a city is another city which
 			can be directly accessed.
 		*/
 		cities[city1].addChild(&cities[city2], distance);
@@ -91,9 +91,9 @@ int main(int argc, char** argv)
 	}
 
 	// Create the PathFinder and PathAlgorithm stuff
-	PathFinder<DjikstraNode> p;
-	Djikstra d;
-	std::vector<DjikstraNode*> solution;
+	PathFinder<DijkstraNode> p;
+	Dijkstra d;
+	std::vector<DijkstraNode*> solution;
 
 	// We'll assume that the user is giving correct arguments, because we deny all responsibilities !
 	p.setStart(cities[start]);

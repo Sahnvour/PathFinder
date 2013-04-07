@@ -4,17 +4,17 @@
 #include "Node.h"
 #include <vector>
 
-class DjikstraNode : public Node
+class DijkstraNode : public Node
 {
 	static const float infinity;
 
 	public:
-		DjikstraNode() :
+		DijkstraNode() :
 			distance(infinity),
 			closed(false)
 		{}
 
-		~DjikstraNode()
+		~DijkstraNode()
 		{}
 
 		void setClosed(bool value)
@@ -52,26 +52,26 @@ class DjikstraNode : public Node
 
 struct CompareNodes
 {
-	bool operator() (const DjikstraNode* n1, const DjikstraNode* n2)
+	bool operator() (const DijkstraNode* n1, const DijkstraNode* n2)
 	{
 		return n1->getDistance() < n2->getDistance();
 	}
 };
 
 
-class Djikstra : public PathAlgorithm<DjikstraNode>
+class Dijkstra : public PathAlgorithm<DijkstraNode>
 {
 	public:
-		Djikstra();
-		~Djikstra();
+		Dijkstra();
+		~Dijkstra();
 
-		bool getPath(std::vector<DjikstraNode*>& path);
+		bool getPath(std::vector<DijkstraNode*>& path);
 		void clear();
 
 	private:
-		void pushOpen(DjikstraNode* node);
-		void popOpen(DjikstraNode* node);
+		void pushOpen(DijkstraNode* node);
+		void popOpen(DijkstraNode* node);
 		void releaseNodes();
 
-		std::vector<DjikstraNode*> open, closed;
+		std::vector<DijkstraNode*> open, closed;
 };
