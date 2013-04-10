@@ -1,10 +1,11 @@
 /*
 		USAGE
 
-This example takes an image and searchs a path between
+This example takes an image and searches a path between
 2 points user-defined. Pure white RGB(255,255,255) is a
-"walkable" pixel ans any other color is a wall.
-Produce an image solution named solution.png
+"walkable" pixel and any other color is a wall.
+Produces an image solution named solution.png in the
+working directory.
 
 Run with 5 arguments :
 output_exe filename x1 y1 x2 y2
@@ -65,7 +66,7 @@ class Square : public AStarNode
 		float distanceTo(AStarNode* node) const
 		{
 			int newX = m_x - node->getX(), newY = m_y - node->getY();
-			return static_cast<float>(sqrt(newX*newX + newY*newY));
+			return sqrtf(newX*newX + newY*newY);
 		}
 
 	private:
@@ -169,6 +170,8 @@ int main(int argc, char** argv)
 	for(unsigned short int x = 0; x < width; ++x)
 		delete[] squares[x];
 	delete[] squares;
+
+	std::getchar();
 
 	return 0;
 }

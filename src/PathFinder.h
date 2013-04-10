@@ -32,7 +32,7 @@ class PathFinder
 			return m_goal;
 		}
 
-		bool findPath(PathAlgorithm<T>& algorithm, std::vector<T*>& solution)
+		bool findPath(PathAlgorithm<T>& algorithm, std::vector<T*>& solution, int hint = 0)
 		{
 			algorithm.setGoal(m_goal);
 			algorithm.setStart(m_start);
@@ -44,6 +44,9 @@ class PathFinder
 
 			if(!pathFound)
 				return false;
+
+			if(hint > 0)
+				solution.reserve(hint);
 
 			for(auto rit = path.rbegin(); rit != path.rend(); ++rit)
 				solution.push_back( static_cast<T*>(*rit) );
