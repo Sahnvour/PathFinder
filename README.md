@@ -52,7 +52,7 @@ int main()
 	myFinder.setGoal(nodes[99]);
 
 	// ... and that's it !
-	bool result = myFinder.findPath<AStarNode>(astar, path); // Just specify from which Node type yours are deriving
+	bool result = myFinder.findPath<AStar>(path); // Just specify the algorithm you want to use
 	
 	if(result)
 		std::cout << "Success ! A path has been found." << std::endl;

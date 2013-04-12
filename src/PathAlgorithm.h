@@ -13,6 +13,11 @@ template<class T>
 class PathAlgorithm
 {
 	public:
+
+		static T* getNodePointer()
+		{
+			return nullptr;
+		}
 		
 		/**
 			@brief The core method of the algorithm, where the path will be evaluated.
@@ -27,18 +32,6 @@ class PathAlgorithm
 			when storing information on nodes, for example.
 		*/
 		virtual void clear() = 0;
-
-		/**
-			@brief Default constructor.
-		*/
-		PathAlgorithm()
-		{}
-
-		/**
-			@brief Destructor.
-		*/
-		virtual ~PathAlgorithm()
-		{}
 
 	protected:
 

@@ -109,13 +109,21 @@ struct CompareNodes
 class AStar : public PathAlgorithm<AStarNode>
 {
 	public:
-		AStar();
-		~AStar();
-		
+
+		static AStar& getInstance()
+		{
+			static AStar instance;
+			return instance;
+		}
+
 		bool getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode*>& path);
 		void clear();
 
 	private:
+
+		AStar();
+		~AStar();
+
 		void releaseNodes();
 		void pushOpen(AStarNode* node);
 		void popOpen(AStarNode* node);

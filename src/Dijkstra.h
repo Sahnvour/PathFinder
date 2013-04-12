@@ -62,13 +62,21 @@ struct CompareNodes
 class Dijkstra : public PathAlgorithm<DijkstraNode>
 {
 	public:
-		Dijkstra();
-		~Dijkstra();
+
+		static Dijkstra& getInstance()
+		{
+			static Dijkstra instance;
+			return instance;
+		}
 
 		bool getPath(DijkstraNode* start, DijkstraNode* goal, std::vector<DijkstraNode*>& path);
 		void clear();
 
 	private:
+
+		Dijkstra();
+		~Dijkstra();
+
 		void pushOpen(DijkstraNode* node);
 		void popOpen(DijkstraNode* node);
 		void releaseNodes();

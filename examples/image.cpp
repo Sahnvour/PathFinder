@@ -77,7 +77,6 @@ class Square : public AStarNode
 int main(int argc, char** argv)
 {
 	// Create the PathFinding stuff and the SFML image to load the image
-	AStar astar;
 	PathFinder<Square> p;
 	
 	sf::Image image;
@@ -156,7 +155,7 @@ int main(int argc, char** argv)
 
 	// Do some timing stuff for fun
 	auto before = std::chrono::high_resolution_clock::now();
-	bool r = p.findPath<AStarNode>(astar, path);
+	bool r = p.findPath<AStar>(path);
 	auto after = std::chrono::high_resolution_clock::now();
 	auto diff = after - before;
 	float count = std::chrono::duration<float, std::milli>(diff).count();

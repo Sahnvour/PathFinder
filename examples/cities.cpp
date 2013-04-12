@@ -94,7 +94,6 @@ int main(int argc, char** argv)
 
 	// Create the PathFinder and PathAlgorithm stuff
 	PathFinder<City> p;
-	Dijkstra d;
 	std::vector<City*> solution;
 
 	// We'll assume that the user is giving correct arguments, because we deny all responsibilities !
@@ -102,7 +101,7 @@ int main(int argc, char** argv)
 	p.setGoal(cities[end]);
 
 	std::cout << "Looking for shortest path between " << start << " and " << end << " ..." << std::endl;
-	bool r = p.findPath<DijkstraNode>(d, solution);
+	bool r = p.findPath<Dijkstra>(solution);
 
 	if(r) // path found
 	{

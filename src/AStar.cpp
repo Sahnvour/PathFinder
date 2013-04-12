@@ -1,9 +1,7 @@
 #include "AStar.h"
 
 AStar::AStar()
-{
-	std::make_heap(open.begin(), open.end(), CompareNodes());
-}
+{}
 
 AStar::~AStar()
 {}
@@ -13,6 +11,7 @@ bool AStar::getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode*>& 
 	AStarNode *currentNode, *childNode;
 	float f, g, h;
 
+	std::make_heap(open.begin(), open.end(), CompareNodes());
 	pushOpen(start);
 
 	while(!open.empty())

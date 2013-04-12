@@ -33,12 +33,12 @@ class PathFinder
 		}
 
 		template <class U>
-		bool findPath(PathAlgorithm<U>& algorithm, std::vector<T*>& solution, int hint = 0)
+		bool findPath(std::vector<T*>& solution, int hint = 0)
 		{
-			std::vector<U*> path;
+			std::vector<decltype(U::getNodePointer())> path;
+			U &algorithm = U::getInstance();
 
 			bool pathFound = algorithm.getPath(m_start, m_goal, path);
-			algorithm.clear();
 
 			if(!pathFound)
 				return false;
