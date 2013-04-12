@@ -112,7 +112,7 @@ class AStar : public PathAlgorithm<AStarNode>
 		AStar();
 		~AStar();
 		
-		bool getPath(std::vector<AStarNode*>& path);
+		bool getPath(AStarNode* start, AStarNode* goal, std::vector<AStarNode*>& path);
 		void clear();
 
 	private:

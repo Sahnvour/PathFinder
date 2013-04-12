@@ -20,7 +20,7 @@ class PathAlgorithm
 			the path found, if there is one.
 			@return true if a path is found, false if there isn't
 		*/
-		virtual bool getPath(std::vector<T*>& path) = 0;
+		virtual bool getPath(T* start, T* goal, std::vector<T*>& path) = 0;
 
 		/**
 			@brief Provides a way for the algorithm to clean-up its data, if needed. Useful
@@ -31,8 +31,7 @@ class PathAlgorithm
 		/**
 			@brief Default constructor.
 		*/
-		PathAlgorithm() :
-			m_start(nullptr), m_goal(nullptr)
+		PathAlgorithm()
 		{}
 
 		/**
@@ -41,34 +40,11 @@ class PathAlgorithm
 		virtual ~PathAlgorithm()
 		{}
 
-		/**
-			@brief Sets the goal to reach in the next research(s).
-			@param[in] goal A pointer to the goal node.
-		*/
-		void setGoal(T* goal)
-		{
-			m_goal = goal;
-		}
-
-		/**
-			@brief Sets the start to use in the next research(s).
-			@param[in] start A pointer to the start node.
-		*/
-		void setStart(T* start)
-		{
-			m_start = start;
-		}
-
 	protected:
 
 		inline float distanceBetween(T* n1, T* n2) const
 		{
 			return n1->distanceTo(n2);
-		}
-
-		inline float distanceToGoal(T* node) const
-		{
-			return distanceBetween(node, m_goal);
 		}
 
 		/**
@@ -86,6 +62,4 @@ class PathAlgorithm
 				parent = static_cast<T*>(parent->getParent());
 			}
 		}
-
-		T* m_start, *m_goal;
 };

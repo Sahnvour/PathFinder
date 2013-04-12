@@ -65,7 +65,7 @@ class Dijkstra : public PathAlgorithm<DijkstraNode>
 		Dijkstra();
 		~Dijkstra();
 
-		bool getPath(std::vector<DijkstraNode*>& path);
+		bool getPath(DijkstraNode* start, DijkstraNode* goal, std::vector<DijkstraNode*>& path);
 		void clear();
 
 	private:

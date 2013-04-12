@@ -32,14 +32,12 @@ class PathFinder
 			return m_goal;
 		}
 
-		bool findPath(PathAlgorithm<T>& algorithm, std::vector<T*>& solution, int hint = 0)
+		template <class U>
+		bool findPath(PathAlgorithm<U>& algorithm, std::vector<T*>& solution, int hint = 0)
 		{
-			algorithm.setGoal(m_goal);
-			algorithm.setStart(m_start);
-			
-			path.clear();
+			std::vector<U*> path;
 
-			bool pathFound = algorithm.getPath(path);
+			bool pathFound = algorithm.getPath(m_start, m_goal, path);
 			algorithm.clear();
 
 			if(!pathFound)
@@ -56,5 +54,4 @@ class PathFinder
 
 	private:
 		T *m_start, *m_goal;
-		std::vector<T*> path;
 };

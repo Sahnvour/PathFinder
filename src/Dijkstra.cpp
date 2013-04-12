@@ -11,14 +11,14 @@ Dijkstra::Dijkstra()
 Dijkstra::~Dijkstra()
 {}
 
-bool Dijkstra::getPath(std::vector<DijkstraNode*>& path)
+bool Dijkstra::getPath(DijkstraNode* start, DijkstraNode* goal, std::vector<DijkstraNode*>& path)
 {
 	DijkstraNode *currentNode, *childNode;
 	float dist;
 
 	std::make_heap(open.begin(), open.end(), CompareNodes());
-	pushOpen(m_start);
-	m_start->setDistance(0.0f);
+	pushOpen(start);
+	start->setDistance(0.0f);
 
 	while(!open.empty())
 	{
@@ -27,7 +27,7 @@ bool Dijkstra::getPath(std::vector<DijkstraNode*>& path)
 		currentNode = open.front();
 		popOpen(currentNode);
 
-		if(currentNode == m_goal)
+		if(currentNode == goal)
 		{
 			reconstructPath(currentNode, path);
 			return true;

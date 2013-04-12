@@ -66,7 +66,7 @@ class Square : public AStarNode
 		float distanceTo(AStarNode* node) const
 		{
 			int newX = m_x - node->getX(), newY = m_y - node->getY();
-			return sqrtf(newX*newX + newY*newY);
+			return sqrtf( static_cast<float>(newX*newX + newY*newY) );
 		}
 
 	private:
@@ -78,15 +78,16 @@ int main(int argc, char** argv)
 {
 	// Create the PathFinding stuff and the SFML image to load the image
 	AStar astar;
-	PathFinder<AStarNode> p;
+	PathFinder<Square> p;
 	
 	sf::Image image;
-	std::vector<AStarNode*> path;
+	std::vector<Square*> path;
 
 	// 5 arguments + program name = 6
 	if(argc != 6)
 	{
 		std::cerr << "Invalid number of arguments provided (got " << argc << ", expected 6), type to exit." << std::endl;
+		std::getchar();
 		return 0;
 	}
 
@@ -95,6 +96,7 @@ int main(int argc, char** argv)
 	if(!image.loadFromFile(filename))
 	{
 		std::cerr << "Failed to load '" << filename << "', type to exit." << std::endl;
+		std::getchar();
 		return 0;
 	}
 	int width = image.getSize().x,
@@ -154,7 +156,7 @@ int main(int argc, char** argv)
 
 	// Do some timing stuff for fun
 	auto before = std::chrono::high_resolution_clock::now();
-	bool r = p.findPath(astar, path);
+	bool r = p.findPath<AStarNode>(astar, path);
 	auto after = std::chrono::high_resolution_clock::now();
 	auto diff = after - before;
 	float count = std::chrono::duration<float, std::milli>(diff).count();

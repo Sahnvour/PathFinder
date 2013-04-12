@@ -59,6 +59,7 @@ int main(int argc, char** argv)
 	if(argc != 4)
 	{
 		std::cerr << "Invalid number of arguments provided (got " << argc << ", expected 4), type to exit." << std::endl;
+		std::getchar();
 		return 0;
 	}
 
@@ -68,6 +69,7 @@ int main(int argc, char** argv)
 	if(!file)
 	{
 		std::cerr << "Could not open file '" << argv[1] << "', type to exit." << std::endl;
+		std::getchar();
 		return 0;
 	}
 
@@ -91,31 +93,28 @@ int main(int argc, char** argv)
 	}
 
 	// Create the PathFinder and PathAlgorithm stuff
-	PathFinder<DijkstraNode> p;
+	PathFinder<City> p;
 	Dijkstra d;
-	std::vector<DijkstraNode*> solution;
+	std::vector<City*> solution;
 
 	// We'll assume that the user is giving correct arguments, because we deny all responsibilities !
 	p.setStart(cities[start]);
 	p.setGoal(cities[end]);
 
 	std::cout << "Looking for shortest path between " << start << " and " << end << " ..." << std::endl;
-	bool r = p.findPath(d, solution);
+	bool r = p.findPath<DijkstraNode>(d, solution);
 
 	if(r) // path found
 	{
-		City* city;
-
 		std::cout << "Solution (" << solution.size()-1 << " steps) :" << std::endl;
-		for(const auto& c : solution)
-		{
-			city = static_cast<City*>(c); // take it back as a City
+		for(const auto& city : solution)
 			std::cout << city->getName() << " ";
-		}
 		std::cout << std::endl;
 	}
 	else
 		std::cerr << "No path was found, sorry." << std::endl;
+
+	std::getchar();
 
 	return 0;
 }
