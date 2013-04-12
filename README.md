@@ -35,7 +35,6 @@ class MyNode : AStarNode
 int main()
 {
 	PathFinder<MyNode> myFinder; // Used to find a path in a MyNode graph
-	AStar astar;
 	
 	std::vector<MyNode*> path;
 	MyNode nodes[100];
