@@ -66,5 +66,5 @@ int main()
 
 There is no extra dependency for the core library.
 
-Tested on Visual Sutdio (Win7 x86_64, Visual Studio 2012 CTP November) and GCC 4.7.
+Tested on Visual Sutdio (Win7 x86_64, Visual Studio 2012 CTP November), GCC 4.7 and clang 3.2.
 Note that the A* heap algorithm produces an exception in Visual Studio only in debug mode.

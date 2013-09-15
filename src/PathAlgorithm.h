@@ -9,23 +9,22 @@
 
 	@see PathFinder
 */
-template<class T>
+template<class TNode>
 class PathAlgorithm
 {
 	public:
-
-		static T* getNodePointer()
-		{
-			return nullptr;
-		}
+		
+		typedef TNode node_type;
 		
 		/**
 			@brief The core method of the algorithm, where the path will be evaluated.
+			@param[in] start A pointer referencing the start node.
+			@param[in] goal A pointer referencing the goal node.
 			@param[out] path A vector of nodes which will be filled with the nodes from
 			the path found, if there is one.
 			@return true if a path is found, false if there isn't
 		*/
-		virtual bool getPath(T* start, T* goal, std::vector<T*>& path) = 0;
+		virtual bool getPath(TNode* start, TNode* goal, std::vector<TNode*>& path) = 0;
 
 		/**
 			@brief Provides a way for the algorithm to clean-up its data, if needed. Useful
@@ -35,7 +34,14 @@ class PathAlgorithm
 
 	protected:
 
-		inline float distanceBetween(T* n1, T* n2) const
+		/**
+			@brief Computes the distance between two nodes using the specified
+			Node::distanceTo() method from T.
+			@param[in] n1 A pointer referencing the source node.
+			@param[in] n2 A pointer referencing the destination node.
+			@see Node::distanceTo()
+		*/
+		inline float distanceBetween(TNode* n1, TNode* n2) const
 		{
 			return n1->distanceTo(n2);
 		}
@@ -45,14 +51,14 @@ class PathAlgorithm
 			@param[in] node The node from where to get the path.
 			@param[out] path The vector to fill with the nodes.
 		*/
-		void reconstructPath(T* node, std::vector<T*>& path)
+		void reconstructPath(TNode* node, std::vector<TNode*>& path)
 		{
-			T* parent = static_cast<T*>(node->getParent());
+			TNode* parent = static_cast<TNode*>(node->getParent());
 			path.push_back(node);
 			while(parent != nullptr)
 			{
 				path.push_back(parent);
-				parent = static_cast<T*>(parent->getParent());
+				parent = static_cast<TNode*>(parent->getParent());
 			}
 		}
 };
