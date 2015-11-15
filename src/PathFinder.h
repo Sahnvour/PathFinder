@@ -70,7 +70,7 @@ class PathFinder
 		template <class TAlgorithm>
 		bool findPath(std::vector<TNode*>& solution, int hint = 0)
 		{
-			std::vector<TAlgorithm::node_type*> path;
+			std::vector<typename TAlgorithm::node_type*> path;
 			TAlgorithm &algorithm = TAlgorithm::getInstance();
 
 			if (hint > 0)
@@ -84,7 +84,7 @@ class PathFinder
 			if(hint > 0)
 				solution.reserve(hint);
 			
-			for(auto rit = std::rbegin(path); rit != std::rend(path); ++rit)
+			for(auto rit = path.rbegin(); rit != path.rend(); ++rit)
 				solution.push_back( static_cast<TNode*>(*rit) );
 
 			return true;
