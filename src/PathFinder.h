@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iterator>
 #include "PathAlgorithm.h"
 
 
@@ -70,7 +71,7 @@ class PathFinder
 		template <class TAlgorithm>
 		bool findPath(std::vector<TNode*>& solution, int hint = 0)
 		{
-			std::vector<TAlgorithm::node_type*> path;
+			std::vector<typename TAlgorithm::node_type*> path;
 			TAlgorithm &algorithm = TAlgorithm::getInstance();
 
 			if (hint > 0)
