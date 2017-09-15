@@ -85,7 +85,7 @@ class PathFinder
 			if(hint > 0)
 				solution.reserve(hint);
 			
-			for(auto rit = std::rbegin(path); rit != std::rend(path); ++rit)
+			for(auto rit = path.rbegin(); rit != path.rend(); ++rit)
 				solution.push_back( static_cast<TNode*>(*rit) );
 
 			return true;
